@@ -13,11 +13,13 @@ class UserPolicy
      * Determine whether the user can view any model.
      *
      * @param  \App\User  $user
+     * @param  \App\User  $model
      * @return mixed
      */
-    public function view(User $user)
+    public function view(User $user, User $model)
     {
-        return $user->hasPermissionTo('view users');
+        return $model->trashed() ?
+            $user->hasRole('ADMINISTRADOR') : $user->hasPermissionTo('view users');
     }
 
     /**
@@ -64,17 +66,5 @@ class UserPolicy
     public function restore(User $user)
     {
         return $user->hasPermissionTo('restore users');
-    }
-
-    /**
-     * Determine whether the user can permanently delete the model.
-     *
-     * @param  \App\User  $user
-     * @param  \App\User  $model
-     * @return mixed
-     */
-    public function forceDelete(User $user, User $model)
-    {
-        return $user->hasRole('force-delete users') && !$user->is($model);
     }
 }
