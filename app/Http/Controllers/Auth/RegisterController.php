@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Rules\Cpf;
 use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
@@ -49,9 +50,11 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'name' => ['required', 'string', 'max:100'],
+            'cpf' => ['required', new Cpf],
+            'email' => ['required', 'string', 'email', 'max:100', 'unique:users'],
+            'phone' => ['digits_between:8,20'],
+            'password' => ['required', 'string', 'min:6', 'confirmed'],
         ]);
     }
 
@@ -65,7 +68,9 @@ class RegisterController extends Controller
     {
         return User::create([
             'name' => $data['name'],
+            'cpf' => preg_replace('/[^0-9]/is', '', $data['cpf']),
             'email' => $data['email'],
+            'phone' => $data['phone'],
             'password' => Hash::make($data['password']),
         ]);
     }

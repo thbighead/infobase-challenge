@@ -5,13 +5,16 @@ namespace PHPSTORM_META {
 
    /**
     * PhpStorm Meta file, to provide autocomplete information for PhpStorm
-    * Generated on 2019-07-06 17:08:59.
+    * Generated on 2019-07-07 16:19:55.
     *
     * @author Barry vd. Heuvel <barryvdh@gmail.com>
     * @see https://github.com/barryvdh/laravel-ide-helper
     */
     override(new \Illuminate\Contracts\Container\Container, map([
         '' => '@',
+        'Arcanedev\LaravelLang\Contracts\TransChecker' => \Arcanedev\LaravelLang\TransChecker::class,
+        'Arcanedev\LaravelLang\Contracts\TransManager' => \Arcanedev\LaravelLang\TransManager::class,
+        'Arcanedev\LaravelLang\Contracts\TransPublisher' => \Arcanedev\LaravelLang\TransPublisher::class,
         'Illuminate\Broadcasting\BroadcastManager' => \Illuminate\Broadcasting\BroadcastManager::class,
         'Illuminate\Bus\Dispatcher' => \Illuminate\Bus\Dispatcher::class,
         'Illuminate\Console\Scheduling\Schedule' => \Illuminate\Console\Scheduling\Schedule::class,
@@ -154,7 +157,7 @@ namespace PHPSTORM_META {
         'session.store' => \Illuminate\Session\Store::class,
         'swift.mailer' => \Swift_Mailer::class,
         'swift.transport' => \Illuminate\Mail\TransportManager::class,
-        'translation.loader' => \Illuminate\Translation\FileLoader::class,
+        'translation.loader' => \Arcanedev\LaravelLang\FileLoader::class,
         'translator' => \Illuminate\Translation\Translator::class,
         'url' => \Illuminate\Routing\UrlGenerator::class,
         'validation.presence' => \Illuminate\Validation\DatabasePresenceVerifier::class,
@@ -164,6 +167,9 @@ namespace PHPSTORM_META {
     ]));
     override(\Illuminate\Contracts\Container\Container::make(0), map([
         '' => '@',
+        'Arcanedev\LaravelLang\Contracts\TransChecker' => \Arcanedev\LaravelLang\TransChecker::class,
+        'Arcanedev\LaravelLang\Contracts\TransManager' => \Arcanedev\LaravelLang\TransManager::class,
+        'Arcanedev\LaravelLang\Contracts\TransPublisher' => \Arcanedev\LaravelLang\TransPublisher::class,
         'Illuminate\Broadcasting\BroadcastManager' => \Illuminate\Broadcasting\BroadcastManager::class,
         'Illuminate\Bus\Dispatcher' => \Illuminate\Bus\Dispatcher::class,
         'Illuminate\Console\Scheduling\Schedule' => \Illuminate\Console\Scheduling\Schedule::class,
@@ -306,7 +312,7 @@ namespace PHPSTORM_META {
         'session.store' => \Illuminate\Session\Store::class,
         'swift.mailer' => \Swift_Mailer::class,
         'swift.transport' => \Illuminate\Mail\TransportManager::class,
-        'translation.loader' => \Illuminate\Translation\FileLoader::class,
+        'translation.loader' => \Arcanedev\LaravelLang\FileLoader::class,
         'translator' => \Illuminate\Translation\Translator::class,
         'url' => \Illuminate\Routing\UrlGenerator::class,
         'validation.presence' => \Illuminate\Validation\DatabasePresenceVerifier::class,
@@ -316,6 +322,9 @@ namespace PHPSTORM_META {
     ]));
     override(\Illuminate\Contracts\Container\Container::makeWith(0), map([
         '' => '@',
+        'Arcanedev\LaravelLang\Contracts\TransChecker' => \Arcanedev\LaravelLang\TransChecker::class,
+        'Arcanedev\LaravelLang\Contracts\TransManager' => \Arcanedev\LaravelLang\TransManager::class,
+        'Arcanedev\LaravelLang\Contracts\TransPublisher' => \Arcanedev\LaravelLang\TransPublisher::class,
         'Illuminate\Broadcasting\BroadcastManager' => \Illuminate\Broadcasting\BroadcastManager::class,
         'Illuminate\Bus\Dispatcher' => \Illuminate\Bus\Dispatcher::class,
         'Illuminate\Console\Scheduling\Schedule' => \Illuminate\Console\Scheduling\Schedule::class,
@@ -458,7 +467,7 @@ namespace PHPSTORM_META {
         'session.store' => \Illuminate\Session\Store::class,
         'swift.mailer' => \Swift_Mailer::class,
         'swift.transport' => \Illuminate\Mail\TransportManager::class,
-        'translation.loader' => \Illuminate\Translation\FileLoader::class,
+        'translation.loader' => \Arcanedev\LaravelLang\FileLoader::class,
         'translator' => \Illuminate\Translation\Translator::class,
         'url' => \Illuminate\Routing\UrlGenerator::class,
         'validation.presence' => \Illuminate\Validation\DatabasePresenceVerifier::class,
@@ -468,6 +477,9 @@ namespace PHPSTORM_META {
     ]));
     override(\App::make(0), map([
         '' => '@',
+        'Arcanedev\LaravelLang\Contracts\TransChecker' => \Arcanedev\LaravelLang\TransChecker::class,
+        'Arcanedev\LaravelLang\Contracts\TransManager' => \Arcanedev\LaravelLang\TransManager::class,
+        'Arcanedev\LaravelLang\Contracts\TransPublisher' => \Arcanedev\LaravelLang\TransPublisher::class,
         'Illuminate\Broadcasting\BroadcastManager' => \Illuminate\Broadcasting\BroadcastManager::class,
         'Illuminate\Bus\Dispatcher' => \Illuminate\Bus\Dispatcher::class,
         'Illuminate\Console\Scheduling\Schedule' => \Illuminate\Console\Scheduling\Schedule::class,
@@ -610,7 +622,7 @@ namespace PHPSTORM_META {
         'session.store' => \Illuminate\Session\Store::class,
         'swift.mailer' => \Swift_Mailer::class,
         'swift.transport' => \Illuminate\Mail\TransportManager::class,
-        'translation.loader' => \Illuminate\Translation\FileLoader::class,
+        'translation.loader' => \Arcanedev\LaravelLang\FileLoader::class,
         'translator' => \Illuminate\Translation\Translator::class,
         'url' => \Illuminate\Routing\UrlGenerator::class,
         'validation.presence' => \Illuminate\Validation\DatabasePresenceVerifier::class,
@@ -620,6 +632,9 @@ namespace PHPSTORM_META {
     ]));
     override(\App::makeWith(0), map([
         '' => '@',
+        'Arcanedev\LaravelLang\Contracts\TransChecker' => \Arcanedev\LaravelLang\TransChecker::class,
+        'Arcanedev\LaravelLang\Contracts\TransManager' => \Arcanedev\LaravelLang\TransManager::class,
+        'Arcanedev\LaravelLang\Contracts\TransPublisher' => \Arcanedev\LaravelLang\TransPublisher::class,
         'Illuminate\Broadcasting\BroadcastManager' => \Illuminate\Broadcasting\BroadcastManager::class,
         'Illuminate\Bus\Dispatcher' => \Illuminate\Bus\Dispatcher::class,
         'Illuminate\Console\Scheduling\Schedule' => \Illuminate\Console\Scheduling\Schedule::class,
@@ -762,7 +777,7 @@ namespace PHPSTORM_META {
         'session.store' => \Illuminate\Session\Store::class,
         'swift.mailer' => \Swift_Mailer::class,
         'swift.transport' => \Illuminate\Mail\TransportManager::class,
-        'translation.loader' => \Illuminate\Translation\FileLoader::class,
+        'translation.loader' => \Arcanedev\LaravelLang\FileLoader::class,
         'translator' => \Illuminate\Translation\Translator::class,
         'url' => \Illuminate\Routing\UrlGenerator::class,
         'validation.presence' => \Illuminate\Validation\DatabasePresenceVerifier::class,
@@ -772,6 +787,9 @@ namespace PHPSTORM_META {
     ]));
     override(\app(0), map([
         '' => '@',
+        'Arcanedev\LaravelLang\Contracts\TransChecker' => \Arcanedev\LaravelLang\TransChecker::class,
+        'Arcanedev\LaravelLang\Contracts\TransManager' => \Arcanedev\LaravelLang\TransManager::class,
+        'Arcanedev\LaravelLang\Contracts\TransPublisher' => \Arcanedev\LaravelLang\TransPublisher::class,
         'Illuminate\Broadcasting\BroadcastManager' => \Illuminate\Broadcasting\BroadcastManager::class,
         'Illuminate\Bus\Dispatcher' => \Illuminate\Bus\Dispatcher::class,
         'Illuminate\Console\Scheduling\Schedule' => \Illuminate\Console\Scheduling\Schedule::class,
@@ -914,7 +932,7 @@ namespace PHPSTORM_META {
         'session.store' => \Illuminate\Session\Store::class,
         'swift.mailer' => \Swift_Mailer::class,
         'swift.transport' => \Illuminate\Mail\TransportManager::class,
-        'translation.loader' => \Illuminate\Translation\FileLoader::class,
+        'translation.loader' => \Arcanedev\LaravelLang\FileLoader::class,
         'translator' => \Illuminate\Translation\Translator::class,
         'url' => \Illuminate\Routing\UrlGenerator::class,
         'validation.presence' => \Illuminate\Validation\DatabasePresenceVerifier::class,
@@ -924,6 +942,9 @@ namespace PHPSTORM_META {
     ]));
     override(\resolve(0), map([
         '' => '@',
+        'Arcanedev\LaravelLang\Contracts\TransChecker' => \Arcanedev\LaravelLang\TransChecker::class,
+        'Arcanedev\LaravelLang\Contracts\TransManager' => \Arcanedev\LaravelLang\TransManager::class,
+        'Arcanedev\LaravelLang\Contracts\TransPublisher' => \Arcanedev\LaravelLang\TransPublisher::class,
         'Illuminate\Broadcasting\BroadcastManager' => \Illuminate\Broadcasting\BroadcastManager::class,
         'Illuminate\Bus\Dispatcher' => \Illuminate\Bus\Dispatcher::class,
         'Illuminate\Console\Scheduling\Schedule' => \Illuminate\Console\Scheduling\Schedule::class,
@@ -1066,7 +1087,7 @@ namespace PHPSTORM_META {
         'session.store' => \Illuminate\Session\Store::class,
         'swift.mailer' => \Swift_Mailer::class,
         'swift.transport' => \Illuminate\Mail\TransportManager::class,
-        'translation.loader' => \Illuminate\Translation\FileLoader::class,
+        'translation.loader' => \Arcanedev\LaravelLang\FileLoader::class,
         'translator' => \Illuminate\Translation\Translator::class,
         'url' => \Illuminate\Routing\UrlGenerator::class,
         'validation.presence' => \Illuminate\Validation\DatabasePresenceVerifier::class,
