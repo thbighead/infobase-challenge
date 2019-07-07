@@ -21,5 +21,11 @@ return [
     'send_password_reset_link'    => 'Send Password Reset Link',
     // custom fields
     'cpf'                         => 'CPF',
-    'phone'                         => 'Phone',
+    'phone'                       => 'Phone',
+    'main_navigation'             => 'MAIN NAVIGATION',
+    'users'                       => 'Users',
+    'account_configuration'       => 'ACCOUNT SETTINGS',
+    'profile'                     => 'Profile',
+    'change_password'             => 'Change Password',
+    'admin_area'                  => 'ADMIN AREA',
 ];
