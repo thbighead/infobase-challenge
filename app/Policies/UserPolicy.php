@@ -19,7 +19,7 @@ class UserPolicy
     public function view(User $user, User $model)
     {
         return $model->trashed() ?
-            $user->hasRole('ADMINISTRADOR') : $user->hasPermissionTo('view users');
+            $user->hasRole('ADMINISTRADOR') : $user->hasPermissionTo('view user');
     }
 
     /**
@@ -30,7 +30,7 @@ class UserPolicy
      */
     public function create(User $user)
     {
-        return $user->hasPermissionTo('create users');
+        return $user->hasPermissionTo('create user');
     }
 
     /**
@@ -42,7 +42,7 @@ class UserPolicy
      */
     public function update(User $user, User $model)
     {
-        return $user->is($model) ? true : $user->hasPermissionTo('update users');
+        return $user->is($model) ? true : $user->hasPermissionTo('update user');
     }
 
     /**
@@ -54,7 +54,7 @@ class UserPolicy
      */
     public function delete(User $user, User $model)
     {
-        return $user->hasPermissionTo('delete users') && !$user->is($model);
+        return $user->hasPermissionTo('delete user') && !$user->is($model);
     }
 
     /**
@@ -65,6 +65,6 @@ class UserPolicy
      */
     public function restore(User $user)
     {
-        return $user->hasPermissionTo('restore users');
+        return $user->hasPermissionTo('restore user');
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Rules\Cpf;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
@@ -13,10 +14,10 @@ use Spatie\Permission\Traits\HasRoles;
  *
  * @property int $id
  * @property string $name
- * @property string $phone
+ * @property string $cpf
+ * @property string|null $phone
  * @property string $email
  * @property string|null $email_verified_at
- * @property string $cpf
  * @property string $password
  * @property string|null $remember_token
  * @property \Illuminate\Support\Carbon|null $created_at
@@ -52,6 +53,8 @@ class User extends Authenticatable implements MustVerifyEmail
 {
     use Notifiable, SoftDeletes, HasRoles;
 
+    public static $ptBrPluralName = 'Usuários';
+
     /**
      * The attributes that are mass assignable.
      *
@@ -77,5 +80,13 @@ class User extends Authenticatable implements MustVerifyEmail
      */
     protected $dates = [
         'created_at', 'updated_at', 'deleted_at',
+    ];
+
+    protected $rules = [
+        'name' => ['required', 'string', 'max:100'],
+        'cpf' => ['required', 'new Cpf'],
+        'email' => ['required', 'string', 'email', 'max:100', 'unique:users'],
+        'phone' => ['digits_between:8,20'],
+        'password' => ['required', 'string', 'min:6', 'confirmed'],
     ];
 }

@@ -1,0 +1,1 @@
+@extends('layouts.nav-form', $form_data)
