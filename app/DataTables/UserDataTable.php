@@ -46,7 +46,7 @@ class UserDataTable extends DataTable
     public function html()
     {
         $buttons = ['export', 'print'];
-        Auth::user()->cant('create') ?: $buttons[] = 'create';
+        if (Auth::user()->can('create', User::class)) $buttons[] = 'create';
         return $this->builder()
             ->columns($this->getColumns(false))
             ->minifiedAjax('')
