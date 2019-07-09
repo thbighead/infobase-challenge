@@ -20,7 +20,7 @@ Auth::routes(['verify' => true]);
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::middleware(['auth', 'verified'])->group(function () {
-    Route::resource('users', 'UserController')->only([
+    Route::resource('user', 'UserController')->only([
         'index', 'create', 'edit', 'show'
     ]);
 });

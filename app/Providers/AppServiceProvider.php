@@ -36,7 +36,7 @@ class AppServiceProvider extends ServiceProvider
         $events->listen(BuildingMenu::class, function (BuildingMenu $event) {
             $event->menu->add(__('adminlte.main_navigation'));
             $event->menu->add([
-                'text' => __('adminlte.user'),
+                'text' => __('adminlte.users'),
                 'url' => route('user.index'),
                 'icon' => 'user',
             ]);

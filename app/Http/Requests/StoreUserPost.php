@@ -2,12 +2,11 @@
 
 namespace App\Http\Requests;
 
-use App\Rules\HashCheck;
-use App\User;
 use Auth;
+use App\Rules\Cpf;
 use Illuminate\Foundation\Http\FormRequest;
 
-class UserRequest extends FormRequest
+class StoreUserPost extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -16,7 +15,7 @@ class UserRequest extends FormRequest
      */
     public function authorize()
     {
-        return Auth::user()->can('update', User::findOrFail($this->get('id')));
+        return Auth::user()->can('create');
     }
 
     /**
@@ -27,9 +26,11 @@ class UserRequest extends FormRequest
     public function rules()
     {
         return [
-            'old_password' => ['sometimes', new HashCheck(Auth::id())],
-            'password' => 'required|same:password_confirmation',
-            'password_confirmation' => 'required|same:password',
+            'name' => ['required', 'string', 'max:100'],
+            'cpf' => ['required', new Cpf],
+            'email' => ['required', 'string', 'email', 'max:100', 'unique:users'],
+            'phone' => ['digits_between:8,20'],
+            'password' => ['required', 'string', 'min:6', 'confirmed'],
         ];
     }
 }

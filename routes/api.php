@@ -18,7 +18,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::middleware('auth:api')->group(function () {
-    Route::resource('users', 'UserController')->except([
+    Route::resource('user', 'UserController')->except([
         'index', 'create', 'edit', 'show'
     ]);
 });

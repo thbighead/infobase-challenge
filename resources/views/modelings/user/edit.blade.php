@@ -1,1 +1,1 @@
-@extends('layouts.nav-form', $form_data)
+@extends('layouts.form', $form_data)

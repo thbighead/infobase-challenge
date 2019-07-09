@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use Str;
 use Auth;
+use App\Http\Requests\StoreUserPost;
 use App\User;
 use App\DataTables\UserDataTable;
-use App\Http\Requests\UserRequest;
+use App\Http\Requests\UpdateUserPutPatch;
 
 class UserController extends Controller
 {
@@ -37,10 +39,10 @@ class UserController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  UserRequest $request
+     * @param  StoreUserPost $request
      * @return \Illuminate\Http\Response
      */
-    public function store(UserRequest $request)
+    public function store(StoreUserPost $request)
     {
         $inputs = $request->all();
         $inputs['password'] = bcrypt($inputs['password']);
@@ -80,11 +82,11 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  UserRequest $request
+     * @param  UpdateUserPutPatch $request
      * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UserRequest $request, $id)
+    public function update(UpdateUserPutPatch $request, $id)
     {
         return $this->coreUpdate($id, $request->all());
     }
@@ -110,34 +112,50 @@ class UserController extends Controller
     private function mountFormFields($withPasswordsFields = true, $withNewPassword = false)
     {
         $nonPasswordsFields = [
-            -3 => [
+            -5 => [
                 'tag' => 'input',
-                'label' => 'Nome',
+                'label' => Str::title(__('validation.attributes.name')),
                 'name' => 'name',
                 'type' => 'text',
-                'hint' => 'Nome Completo',
+                'hint' => __('adminlte.full_name'),
                 'grid' => 'col-sm-6'
             ],
-            -2 => [
+            -4 => [
                 'tag' => 'input',
-                'label' => 'E-mail',
+                'label' => __('adminlte.email'),
                 'name' => 'email',
                 'type' => 'email',
-                'hint' => 'name.lastname@dotlib.com.br',
+                'hint' => 'mail@mail.com',
                 'grid' => 'col-sm-6'
-            ]
+            ],
+            -3 =>[
+                'tag' => 'input',
+                'label' => __('adminlte.cpf'),
+                'name' => 'cpf',
+                'type' => 'text',
+                'hint' => __('adminlte.cpf_hint'),
+                'grid' => 'col-sm-6'
+            ],
+            -2 =>[
+                'tag' => 'input',
+                'label' => __('adminlte.phone'),
+                'name' => 'phone',
+                'type' => 'text',
+                'hint' => __('adminlte.phone_hint'),
+                'grid' => 'col-sm-6'
+            ],
         ];
         $passwordsFields = [
             [
                 'tag' => 'input',
-                'label' => 'Nova Senha',
+                'label' => __('adminlte.new_password'),
                 'name' => 'password',
                 'type' => 'password',
                 'grid' => 'col-sm-6'
             ],
             [
                 'tag' => 'input',
-                'label' => 'Confirmação de senha',
+                'label' => __('adminlte.password_confirmation'),
                 'name' => 'password_confirmation',
                 'type' => 'password',
                 'grid' => 'col-sm-6'
@@ -147,21 +165,21 @@ class UserController extends Controller
             $passwordsFields = [
                 [
                     'tag' => 'input',
-                    'label' => 'Senha Atual',
+                    'label' => __('adminlte.old_password'),
                     'name' => 'old_password',
                     'type' => 'password',
                     'grid' => 'col-sm-4'
                 ],
                 [
                     'tag' => 'input',
-                    'label' => 'Nova Senha',
+                    'label' => __('adminlte.new_password'),
                     'name' => 'password',
                     'type' => 'password',
                     'grid' => 'col-sm-4'
                 ],
                 [
                     'tag' => 'input',
-                    'label' => 'Confirmação de senha',
+                    'label' => __('adminlte.password_confirmation'),
                     'name' => 'password_confirmation',
                     'type' => 'password',
                     'grid' => 'col-sm-4'

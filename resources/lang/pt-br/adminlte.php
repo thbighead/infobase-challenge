@@ -21,11 +21,16 @@ return [
     'send_password_reset_link'    => 'Enviar link de recuperação de senha',
     // custom fields
     'cpf'                         => 'CPF',
+    'cpf_hint'                    => 'Somente números',
     'phone'                       => 'Telefone',
+    'phone_hint'                  => 'Número de Telefone',
     'main_navigation'             => 'NAVEGAÇÃO PADRÃO',
     'users'                       => 'Usuários',
     'account_configuration'       => 'CONFIGURAÇÕES DE CONTA',
     'profile'                     => 'Perfil',
     'change_password'             => 'Trocar Senha',
+    'old_password'                => 'Senha Atual',
+    'new_password'                => 'Nova Senha',
+    'password_confirmation'       => 'Confirmação de senha',
     'admin_area'                  => 'ÁREA ADMINISTRATIVA',
 ];

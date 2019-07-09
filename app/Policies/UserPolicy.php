@@ -19,7 +19,8 @@ class UserPolicy
     public function view(User $user, User $model)
     {
         return $model->trashed() ?
-            $user->hasRole('ADMINISTRADOR') : $user->hasPermissionTo('view user');
+            $user->hasRole('ADMINISTRADOR') : $user->is($model) ?
+                true : $user->hasPermissionTo('view user');
     }
 
     /**

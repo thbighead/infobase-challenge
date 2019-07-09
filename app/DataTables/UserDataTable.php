@@ -3,6 +3,7 @@
 namespace App\DataTables;
 
 use Arr;
+use Auth;
 use App\User;
 use Yajra\DataTables\Services\DataTable;
 
@@ -11,12 +12,11 @@ class UserDataTable extends DataTable
     /**
      * Build DataTable class.
      *
-     * @param mixed $query Results from query() method.
      * @return \Yajra\DataTables\DataTableAbstract
      */
-    public function dataTable($query)
+    public function dataTable()
     {
-        return $this->datatables
+        return datatables()
             ->eloquent($this->query())
             ->addColumn('action', function ($row) {
                 return view('layouts.datatable-action-buttons', [
@@ -45,6 +45,8 @@ class UserDataTable extends DataTable
      */
     public function html()
     {
+        $buttons = ['export', 'print'];
+        Auth::user()->cant('create') ?: $buttons[] = 'create';
         return $this->builder()
             ->columns($this->getColumns(false))
             ->minifiedAjax('')
@@ -52,11 +54,7 @@ class UserDataTable extends DataTable
             ->parameters([
                 'dom' => 'Blfrtip',
                 'order' => [[0, 'desc']],
-                'buttons' => [
-                    'export',
-                    'print',
-                    'create',
-                ],
+                'buttons' => $buttons,
                 'language' => [
                     // Para mais informações visite https://datatables.net/plug-ins/i18n/Portuguese-Brasil
                     'url' => url('//cdn.datatables.net/plug-ins/1.10.19/i18n/Portuguese-Brasil.json')

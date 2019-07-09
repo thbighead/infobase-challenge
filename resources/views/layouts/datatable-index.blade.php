@@ -1,9 +1,7 @@
 @extends('adminlte::page')
 
 @section('content_header')
-    <h1 class="page-header">{{ $title }}
-        {{--<small><a href="#" id="nav-tour" class="fa fa-question-circle"></a></small>--}}
-    </h1>
+    <h1 class="page-header">{{ $title }}</h1>
 @endsection
 
 @section('content')
