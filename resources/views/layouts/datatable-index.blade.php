@@ -69,4 +69,5 @@
     <script src="//cdn.datatables.net/buttons/1.5.2/js/dataTables.buttons.min.js"></script>
     <script src="{{ asset('vendor/datatables/buttons.server-side.js') }}"></script>
     {!! $dataTable->scripts() !!}
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 @endpush

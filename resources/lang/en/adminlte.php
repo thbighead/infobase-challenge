@@ -33,4 +33,5 @@ return [
     'new_password'                => 'New Password',
     'password_confirmation'       => 'Confirm Password',
     'admin_area'                  => 'ADMIN AREA',
+    'admin'                       => 'ADMIN',
 ];

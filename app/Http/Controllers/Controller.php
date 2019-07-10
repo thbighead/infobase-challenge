@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Spatie\Permission\Models\Role;
 use Str;
 use Arr;
 use Route;
@@ -70,6 +71,8 @@ class Controller extends BaseController
             foreach ($NxNRelationships as $relatedModel) {
                 if (Arr::has($inputs, $relatedModel))
                     $object->$relatedModel()->attach($inputs[$relatedModel]);
+                elseif(Role::all('name')->pluck('name')->contains($relatedModel))
+                    $object->assignRole($relatedModel);
             }
 
             return redirect()->back()->with('success', $success);
@@ -136,6 +139,8 @@ class Controller extends BaseController
             foreach ($NxNRelationships as $relatedModel) {
                 if (Arr::has($inputs, $relatedModel))
                     $object->$relatedModel()->sync($inputs[$relatedModel]);
+                elseif(Role::all('name')->pluck('name')->contains($relatedModel))
+                    $object->syncRoles($relatedModel);
             }
 
             return redirect()->back()->with('success', $success);

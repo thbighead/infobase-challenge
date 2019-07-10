@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\User;
 use Auth;
 use App\Rules\Cpf;
 use Illuminate\Foundation\Http\FormRequest;
@@ -15,7 +16,7 @@ class StoreUserPost extends FormRequest
      */
     public function authorize()
     {
-        return Auth::user()->can('create');
+        return Auth::user()->can('create', User::class);
     }
 
     /**

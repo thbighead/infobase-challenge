@@ -16,7 +16,7 @@ class UpdateUserPutPatch extends FormRequest
      */
     public function authorize()
     {
-        return Auth::user()->can('update', User::findOrFail($this->get('id')));
+        return Auth::user()->can('update', User::findOrFail($this->route('user')));
     }
 
     /**

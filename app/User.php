@@ -89,4 +89,11 @@ class User extends Authenticatable implements MustVerifyEmail
         'phone' => ['digits_between:8,20'],
         'password' => ['required', 'string', 'min:6', 'confirmed'],
     ];
+
+    public function getProfileAttribute()
+    {
+        return $this->getRoleNames()->first();
+    }
+
+    protected $appends = ['profile'];
 }

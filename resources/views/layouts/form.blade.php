@@ -1,10 +1,8 @@
 @extends('adminlte::page')
 
 @section('content_header')
-    <h1 class="page-header">{{ $title }}
-        {{--<small><a href="#" id="nav-tour" class="fa fa-question-circle"></a></small>--}}
-    </h1>
-    <a href="{{ isset($back) ? $back : URL::previous() }}" class="btn btn-default"><i
+    <h1 class="page-header">{{ $title }}</h1>
+    <a href="{{ route('home') }}" class="btn btn-default"><i
                 class="fa fa-fw fa-arrow-circle-o-left"></i> Voltar</a>
 @endsection
 
@@ -36,10 +34,10 @@
     @yield('before-form')
     <form action="{{ isset($action) ? $action : '#' }}" method="POST">
         @isset($method_field)
-            {{ method_field($method_field) }}
+            @method($method_field)
         @endisset
         @isset($action)
-            {{ csrf_field() }}
+            @csrf
         @endisset
         @foreach($fields as $value)
             @php
@@ -66,7 +64,7 @@
                         for ($i = $pos; $i < 4; $i++) {
                             $clearfixHTML .= " visible-{$sizes[$i]}-block";
                         }
-                        if (sizeof($clearfixHTML) > 0) {
+                        if (!empty($clearfixHTML)) {
                             echo "<div class=\"clearfix$clearfixHTML\"></div>";
                         }
                     }

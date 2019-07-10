@@ -1,10 +1,8 @@
 @extends('adminlte::page')
 
 @section('content_header')
-    <h1 class="page-header">{{ $title }}
-        {{--<small><a href="#" id="nav-tour" class="fa fa-question-circle"></a></small>--}}
-    </h1>
-    <a href="{{ isset($back) ? $back : URL::previous() }}" class="btn btn-default"><i
+    <h1 class="page-header">{{ $title }}</h1>
+    <a href="{{ !empty(session('back')) ? session('back') : URL::previous() }}" class="btn btn-default"><i
                 class="fa fa-fw fa-arrow-circle-o-left"></i> Voltar</a>
 @endsection
 
@@ -85,7 +83,7 @@
                                         for ($i = $pos; $i < 4; $i++) {
                                             $clearfixHTML .= " visible-{$sizes[$i]}-block";
                                         }
-                                        if (sizeof($clearfixHTML) > 0) {
+                                        if (!empty($clearfixHTML)) {
                                             echo "<div class=\"clearfix$clearfixHTML\"></div>";
                                         }
                                     }

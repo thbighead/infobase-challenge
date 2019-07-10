@@ -39,20 +39,21 @@ class UserController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  StoreUserPost $request
+     * @param StoreUserPost $request
      * @return \Illuminate\Http\Response
      */
     public function store(StoreUserPost $request)
     {
-        $inputs = $request->all();
+        $inputs = $request->except('profile');
         $inputs['password'] = bcrypt($inputs['password']);
-        return $this->coreStore($inputs);
+        $inputs['email_verified_at'] = now()->toDateTimeString();
+        return $this->coreStore($inputs, [], [$request->get('profile') ? 'ADMINISTRADOR' : 'USUARIO']);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -66,7 +67,7 @@ class UserController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -82,19 +83,19 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  UpdateUserPutPatch $request
-     * @param  int $id
+     * @param UpdateUserPutPatch $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function update(UpdateUserPutPatch $request, $id)
     {
-        return $this->coreUpdate($id, $request->all());
+        return $this->coreUpdate($id, $request->all(), [], [$request->get('profile') ? 'ADMINISTRADOR' : 'USUARIO']);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
@@ -112,6 +113,13 @@ class UserController extends Controller
     private function mountFormFields($withPasswordsFields = true, $withNewPassword = false)
     {
         $nonPasswordsFields = [
+            -6 => [
+                'tag' => 'checkbox',
+                'label' => __('adminlte.admin'),
+                'value' => 'ADMINISTRADOR',
+                'name' => 'profile',
+                'grid' => 'col-xs-12'
+            ],
             -5 => [
                 'tag' => 'input',
                 'label' => Str::title(__('validation.attributes.name')),
@@ -128,7 +136,7 @@ class UserController extends Controller
                 'hint' => 'mail@mail.com',
                 'grid' => 'col-sm-6'
             ],
-            -3 =>[
+            -3 => [
                 'tag' => 'input',
                 'label' => __('adminlte.cpf'),
                 'name' => 'cpf',
@@ -136,7 +144,7 @@ class UserController extends Controller
                 'hint' => __('adminlte.cpf_hint'),
                 'grid' => 'col-sm-6'
             ],
-            -2 =>[
+            -2 => [
                 'tag' => 'input',
                 'label' => __('adminlte.phone'),
                 'name' => 'phone',

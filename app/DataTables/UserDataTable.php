@@ -33,7 +33,10 @@ class UserDataTable extends DataTable
      */
     public function query()
     {
-        $query = User::query()->select($this->getColumns());
+        $query = User::query()->join('model_has_roles as mhr', function ($join) {
+            $join->on('mhr.model_id', '=', 'users.id')->where('mhr.model_type', '=', 'App\User');
+        })->join('roles', 'mhr.role_id', '=', 'roles.id')
+            ->select(['users.id', 'roles.name as role', 'users.name', 'users.email', 'users.created_at']);
 
         return $this->applyScopes($query);
     }
@@ -45,8 +48,6 @@ class UserDataTable extends DataTable
      */
     public function html()
     {
-        $buttons = ['export', 'print'];
-        if (Auth::user()->can('create', User::class)) $buttons[] = 'create';
         return $this->builder()
             ->columns($this->getColumns(false))
             ->minifiedAjax('')
@@ -54,7 +55,7 @@ class UserDataTable extends DataTable
             ->parameters([
                 'dom' => 'Blfrtip',
                 'order' => [[0, 'desc']],
-                'buttons' => $buttons,
+                'buttons' => Auth::user()->can('create', User::class) ? ['create'] : [],
                 'language' => [
                     // Para mais informações visite https://datatables.net/plug-ins/i18n/Portuguese-Brasil
                     'url' => url('//cdn.datatables.net/plug-ins/1.10.19/i18n/Portuguese-Brasil.json')
@@ -74,10 +75,11 @@ class UserDataTable extends DataTable
     protected function getColumns($forEloquent = true)
     {
         $columns = [
-            ['data' => 'id', 'name' => 'id', 'title' => '#', 'footer' => 'ID'],
-            ['data' => 'name', 'name' => 'name', 'title' => 'Nome', 'footer' => 'Nome'],
-            ['data' => 'email', 'name' => 'email', 'title' => 'E-mail', 'footer' => 'E-mail'],
-            ['data' => 'created_at', 'name' => 'created_at', 'title' => 'Data de Criação', 'footer' => 'Data de Criação'],
+            ['data' => 'id', 'name' => 'users.id', 'title' => '#', 'footer' => 'ID'],
+            ['data' => 'role', 'name' => 'roles.name', 'title' => 'Perfil', 'footer' => 'Perfil'],
+            ['data' => 'name', 'name' => 'users.name', 'title' => 'Nome', 'footer' => 'Nome'],
+            ['data' => 'email', 'name' => 'users.email', 'title' => 'E-mail', 'footer' => 'E-mail'],
+            ['data' => 'created_at', 'name' => 'users.created_at', 'title' => 'Data de Criação', 'footer' => 'Data de Criação'],
         ];
 
         if ($forEloquent)
