@@ -46,7 +46,8 @@ class UserController extends Controller
     {
         $inputs = $request->except('profile');
         $inputs['password'] = bcrypt($inputs['password']);
-        $inputs['email_verified_at'] = now()->toDateTimeString();
+        $inputs['api_token'] = date('dmYHis') . Str::random(46);
+        // $inputs['email_verified_at'] = now()->toDateTimeString();
         return $this->coreStore($inputs, [], [$request->get('profile') ? 'ADMINISTRADOR' : 'USUARIO']);
     }
 
@@ -58,8 +59,18 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        return $this->coreShow(User::findOrFail($id), [
-            'form_data' => $this->mountFormFields(false),
+        $user = User::findOrFail($id);
+        $formData = $this->mountFormFields(false);
+        $formData['fields'][-2] = [
+            'tag' => 'input',
+            'label' => 'API Token',
+            'value' => $user->api_token,
+            'name' => 'api_token',
+            'type' => 'text',
+            'grid' => 'col-xs-12'
+        ];
+        return $this->coreShow($user, [
+            'form_data' => $formData,
             'is_logged_user' => Auth::id() == $id,
         ]);
     }
@@ -113,14 +124,14 @@ class UserController extends Controller
     private function mountFormFields($withPasswordsFields = true, $withNewPassword = false)
     {
         $nonPasswordsFields = [
-            -6 => [
+            -7 => [
                 'tag' => 'checkbox',
                 'label' => __('adminlte.admin'),
                 'value' => 'ADMINISTRADOR',
                 'name' => 'profile',
                 'grid' => 'col-xs-12'
             ],
-            -5 => [
+            -6 => [
                 'tag' => 'input',
                 'label' => Str::title(__('validation.attributes.name')),
                 'name' => 'name',
@@ -128,7 +139,7 @@ class UserController extends Controller
                 'hint' => __('adminlte.full_name'),
                 'grid' => 'col-sm-6'
             ],
-            -4 => [
+            -5 => [
                 'tag' => 'input',
                 'label' => __('adminlte.email'),
                 'name' => 'email',
@@ -136,7 +147,7 @@ class UserController extends Controller
                 'hint' => 'mail@mail.com',
                 'grid' => 'col-sm-6'
             ],
-            -3 => [
+            -4 => [
                 'tag' => 'input',
                 'label' => __('adminlte.cpf'),
                 'name' => 'cpf',
@@ -144,7 +155,7 @@ class UserController extends Controller
                 'hint' => __('adminlte.cpf_hint'),
                 'grid' => 'col-sm-6'
             ],
-            -2 => [
+            -3 => [
                 'tag' => 'input',
                 'label' => __('adminlte.phone'),
                 'name' => 'phone',

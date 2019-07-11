@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Str;
 
 class RegisterController extends Controller
 {
@@ -66,12 +67,15 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        $user = User::create([
             'name' => $data['name'],
             'cpf' => preg_replace('/[^0-9]/is', '', $data['cpf']),
             'email' => $data['email'],
             'phone' => $data['phone'],
             'password' => Hash::make($data['password']),
         ])->assignRole('USUARIO');
+        $user->forceFill(['api_token' => date('dmYHis') . Str::random(46)])->save();
+
+        return $user;
     }
 }

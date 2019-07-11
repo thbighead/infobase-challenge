@@ -1,5 +1,6 @@
 <?php
 
+use App\User;
 use Illuminate\Http\Request;
 
 /*
@@ -13,10 +14,18 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+Route::middleware('auth:api')->name('api.')->group(function () {
+    Route::apiResource('user', 'API\\UserController');
 });
 
-Route::middleware('auth:api')->name('api.')->group(function () {
-    Route::apiResource('user', 'UserController');
-});
+Route::post('/token', function (Request $request) {
+    if ($user = User::whereEmail($request->get('email'))->first()) {
+        if (Hash::check($request->get('password'), $user->password)) {
+            if (!$user->api_token)
+                $user->forceFill(['api_token' => date('dmYHis') . Str::random(46)])->save();
+            return response()->json($user->api_token);
+        }
+    }
+
+    return response()->json('Wrong credentials', 400);
+})->name('api.token');

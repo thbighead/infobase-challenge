@@ -2,10 +2,13 @@
 
 namespace App\Http\Requests;
 
+use App\Rules\Cpf;
 use App\Rules\HashCheck;
 use App\User;
 use Auth;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
+use Str;
 
 class UpdateUserPutPatch extends FormRequest
 {
@@ -26,10 +29,22 @@ class UpdateUserPutPatch extends FormRequest
      */
     public function rules()
     {
-        return [
-            'old_password' => ['sometimes', new HashCheck(Auth::id())],
-            'password' => 'required|same:password_confirmation',
-            'password_confirmation' => 'required|same:password',
+        $rules = [
+            'name' => ['sometimes', 'required', 'string', 'max:100'],
+            'cpf' => ['sometimes', 'required', new Cpf],
+            'email' => ['sometimes', 'required', 'string', 'email', 'max:100', Rule::unique('users')
+                ->ignore($this->route('user'))->where(function ($query) {
+                    return $query->whereNull('deleted_at');
+                })],
+            'phone' => ['sometimes', 'digits_between:8,20'],
+            'profile' => ['sometimes', Rule::in(['USUARIO', 'ADMINISTRADOR'])],
         ];
+
+        if (!Str::contains($this->url(), '/api/')) {
+            $rules['password'] = 'required|confirmed';
+            $rules['old_password'] = ['sometimes', new HashCheck(Auth::id())];
+        }
+
+        return $rules;
     }
 }

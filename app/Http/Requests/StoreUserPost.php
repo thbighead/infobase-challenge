@@ -2,9 +2,11 @@
 
 namespace App\Http\Requests;
 
-use App\User;
+use Str;
 use Auth;
+use App\User;
 use App\Rules\Cpf;
+use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreUserPost extends FormRequest
@@ -26,12 +28,17 @@ class StoreUserPost extends FormRequest
      */
     public function rules()
     {
-        return [
+        $rules = [
             'name' => ['required', 'string', 'max:100'],
             'cpf' => ['required', new Cpf],
             'email' => ['required', 'string', 'email', 'max:100', 'unique:users'],
             'phone' => ['digits_between:8,20'],
-            'password' => ['required', 'string', 'min:6', 'confirmed'],
+            'password' => ['required', 'string', 'min:6'],
+            'profile' => ['sometimes', Rule::in(['USUARIO', 'ADMINISTRADOR'])],
         ];
+
+        if (!Str::contains($this->url(), '/api/')) $rules['password'][] = 'confirmed';
+
+        return $rules;
     }
 }
