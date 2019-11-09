@@ -34,4 +34,5 @@ return [
     'password_confirmation'       => 'Confirm Password',
     'admin_area'                  => 'ADMIN AREA',
     'admin'                       => 'ADMIN',
+    'document_models'              => 'Document Models',
 ];

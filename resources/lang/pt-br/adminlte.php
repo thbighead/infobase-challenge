@@ -34,4 +34,5 @@ return [
     'password_confirmation'       => 'Confirmação de senha',
     'admin_area'                  => 'ÁREA ADMINISTRATIVA',
     'admin'                       => 'ADMINISTRADOR',
+    'document_models'              => 'Modelos de Documento',
 ];

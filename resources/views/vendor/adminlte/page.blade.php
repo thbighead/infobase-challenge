@@ -16,6 +16,10 @@
 @section('body')
     <div class="wrapper">
 
+        <!-- Loader -->
+        <article class="loader-canvas">
+            <section class="lds-circle"><div></div></section>
+        </article>
         <!-- Main Header -->
         <header class="main-header">
             @if(config('adminlte.layout') == 'top-nav')
@@ -113,7 +117,7 @@
             </section>
 
             <!-- Main content -->
-            <section class="content">
+            <section id="doking_vue_app" class="content">
 
                 @yield('content')
 

@@ -54,6 +54,11 @@ class AppServiceProvider extends ServiceProvider
             if (Auth::user()->hasRole('ADMINISTRADOR')) {
                 $event->menu->add(__('adminlte.admin_area'));
                 $event->menu->add([
+                    'text' => __('adminlte.document_models'),
+                    'url' => route('document_model.index'),
+                    'icon' => 'file-code-o',
+                ]);
+                $event->menu->add([
                     'text' => 'Telescope',
                     'url' => 'telescope',
                     'icon' => 'bullseye',
