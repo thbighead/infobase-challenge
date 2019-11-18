@@ -65,7 +65,6 @@
 @endif
 
 @yield('adminlte_js')
-<script src="{{ asset('js/app.js') }}"></script>
 
 </body>
 </html>

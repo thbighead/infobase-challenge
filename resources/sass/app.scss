@@ -5,6 +5,7 @@
 @import 'variables';
 
 .loader-canvas {
+    display: none;
     background-color: rgba(255,255,255,0.5);
     position: fixed;
     z-index: 1050;
@@ -12,19 +13,19 @@
     height: 100vh;
 
     .lds-circle {
-        display: inline-block;
+        display: inherit;
         transform: translateZ(1px);
         position: fixed;
         top: 50%;
         right: 50%;
 
         & > div {
-            display: inline-block;
+            display: inherit;
             width: 51px;
             height: 51px;
             margin: 6px;
             border-radius: 50%;
-            background: #fff;
+            background: #3c8dbc;
             animation: lds-circle 2.4s cubic-bezier(0, 0.2, 0.8, 1) infinite;
         }
     }

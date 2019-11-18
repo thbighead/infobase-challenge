@@ -1886,7 +1886,7 @@ __webpack_require__.r(__webpack_exports__);
     ckeditor: _ckeditor_ckeditor5_vue__WEBPACK_IMPORTED_MODULE_1___default.a.component
   },
   mounted: function mounted() {
-    console.log('montei o bagulho');
+    document.getElementById('full-page-loader').style.display = 'none';
   },
   data: function data() {
     return {

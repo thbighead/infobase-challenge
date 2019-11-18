@@ -12,7 +12,7 @@
             ckeditor: CKEditor.component
         },
         mounted() {
-            console.log('montei o bagulho');
+            document.getElementById('full-page-loader').style.display = 'none';
         },
         data() {
             return {

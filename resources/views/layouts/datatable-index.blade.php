@@ -7,7 +7,7 @@
 @section('content')
     @yield('before_table')
     <div class="table-responsive" style="overflow-x: scroll;">
-        {!! $dataTable->table(['id' => 'laravel-datatable', 'class' => 'table table-hover', 'style' => 'width: 100%;'], true)  !!}
+        {!! $dataTable->table(['id' => 'laravel-datatable', 'class' => 'table table-hover', 'style' => 'width: 100%;'], true) !!}
     </div>
 
     <script>

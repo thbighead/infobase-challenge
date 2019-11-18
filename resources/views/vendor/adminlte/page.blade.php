@@ -17,7 +17,7 @@
     <div class="wrapper">
 
         <!-- Loader -->
-        <article class="loader-canvas">
+        <article id="full-page-loader" class="loader-canvas">
             <section class="lds-circle"><div></div></section>
         </article>
         <!-- Main Header -->
@@ -117,7 +117,7 @@
             </section>
 
             <!-- Main content -->
-            <section id="doking_vue_app" class="content">
+            <section class="content">
 
                 @yield('content')
 
